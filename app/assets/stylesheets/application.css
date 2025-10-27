@@ -1,0 +1,4 @@
+/* Tailwind handled through CDN for rapid prototyping */
+*, *::before, *::after {
+  box-sizing: border-box;
+}

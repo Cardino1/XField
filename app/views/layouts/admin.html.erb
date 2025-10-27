@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XField Admin</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script nonce="<%= content_security_policy_nonce %>" src="https://cdn.tailwindcss.com"></script>
+    <script nonce="<%= content_security_policy_nonce %>">
+      tailwind.config = {
+        theme: { extend: { colors: { primary: { 500: '#6366f1', 600: '#4f46e5' } } } }
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-100">
+    <div class="flex min-h-screen">
+      <aside class="hidden w-64 flex-shrink-0 border-r border-slate-800 bg-slate-950/90 px-6 py-8 md:block">
+        <h1 class="font-display text-xl font-semibold text-white">XField Admin</h1>
+        <nav class="mt-8 space-y-3 text-sm">
+          <%= link_to "Dashboard", admin_root_path, class: admin_nav_class(current_page?(admin_root_path)) %>
+          <%= link_to "Articles", admin_articles_path, class: admin_nav_class(controller_name == "articles") %>
+          <%= link_to "Opportunities", admin_opportunities_path, class: admin_nav_class(controller_name == "opportunities") %>
+          <%= link_to "Investors", admin_investors_path, class: admin_nav_class(controller_name == "investors") %>
+          <%= link_to "Users", admin_users_path, class: admin_nav_class(controller_name == "users") %>
+          <%= link_to "View Site", root_path, class: "mt-6 block rounded-lg border border-slate-700 px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.3em] text-slate-300 transition hover:border-primary-500 hover:text-white" %>
+        </nav>
+      </aside>
+      <main class="flex-1 px-6 py-10">
+        <% if notice.present? %>
+          <div class="mb-6 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200">
+            <%= notice %>
+          </div>
+        <% end %>
+        <% if alert.present? %>
+          <div class="mb-6 rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+            <%= alert %>
+          </div>
+        <% end %>
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

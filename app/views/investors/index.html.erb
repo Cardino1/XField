@@ -1,0 +1,44 @@
+<section class="mx-auto max-w-6xl px-6 py-16">
+  <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Investors</p>
+      <h1 class="mt-2 font-display text-4xl font-semibold text-white">Meet the XField capital network</h1>
+      <p class="mt-4 max-w-2xl text-slate-300">Partner investors who share our conviction in deep tech and bold founders. Craft a page for your firm to tell founders what you champion.</p>
+    </div>
+    <%= link_to "Create Your VC Page", new_investor_path, class: "inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-white/20 transition hover:bg-slate-100" %>
+  </div>
+  <div class="mt-10 grid gap-6 md:grid-cols-2">
+    <% @investors.each do |investor| %>
+      <article class="rounded-3xl border border-slate-800/60 bg-slate-900/70 p-6">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-semibold text-white"><%= investor.firm_name %></h2>
+          <span class="text-xs uppercase tracking-[0.2em] text-slate-500">Partner</span>
+        </div>
+        <p class="mt-3 text-sm text-slate-300"><%= investor.values %></p>
+        <div class="mt-4 grid gap-4 text-sm text-slate-300">
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Looking for</p>
+            <p class="mt-1"><%= investor.looking_for %></p>
+          </div>
+          <% if investor.portfolio_highlights.present? %>
+            <div>
+              <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Portfolio</p>
+              <p class="mt-1"><%= investor.portfolio_highlights %></p>
+            </div>
+          <% end %>
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Request for startups</p>
+            <p class="mt-1"><%= investor.request_for_startups %></p>
+          </div>
+        </div>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs text-slate-400">
+          <span>Contact: <%= mail_to investor.email, investor.email, class: "text-primary-200 hover:text-primary-100" %></span>
+          <% if investor.website.present? %>
+            <span>•</span>
+            <%= link_to "Website", investor.website, target: "_blank", rel: "noopener", class: "text-primary-200 hover:text-primary-100" %>
+          <% end %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</section>
