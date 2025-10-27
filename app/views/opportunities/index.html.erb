@@ -1,0 +1,34 @@
+<section class="mx-auto max-w-6xl px-6 py-16">
+  <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Opportunities</p>
+      <h1 class="mt-2 font-display text-4xl font-semibold text-white">Find your next frontier</h1>
+      <p class="mt-4 max-w-2xl text-slate-300">Browse roles, collaborations, and co-founder calls curated by the XField community. Submit yours and we'll surface it once approved by our team.</p>
+    </div>
+    <%= link_to "Submit Opportunity", new_opportunity_path, class: "inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-600/30 transition hover:bg-primary-500" %>
+  </div>
+  <div class="mt-10 grid gap-8">
+    <% @opportunities.each do |type, entries| %>
+      <div id="<%= type %>" class="space-y-5 rounded-3xl border border-slate-800/60 bg-slate-900/70 p-6">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-semibold text-white"><%= type.humanize %></h2>
+          <span class="<%= opportunity_badge(type) %>"><%= entries.size %> live</span>
+        </div>
+        <div class="space-y-4">
+          <% entries.each do |opportunity| %>
+            <article class="rounded-2xl border border-slate-800/60 bg-slate-950/70 p-5 transition hover:border-primary-500/50">
+              <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+                <span><%= opportunity.organization %></span>
+                <span><%= opportunity.created_at.strftime("%b %d, %Y") %></span>
+              </div>
+              <h3 class="mt-3 text-xl font-semibold text-white"><%= opportunity.title %></h3>
+              <p class="mt-1 text-sm text-slate-300">Posted by <%= opportunity.full_name %></p>
+              <p class="mt-3 text-sm text-slate-300"><%= opportunity.description %></p>
+              <%= link_to "Open details", opportunity.link, class: "mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-200 transition hover:text-primary-100", target: "_blank", rel: "noopener" %>
+            </article>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

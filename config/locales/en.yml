@@ -1,0 +1,19 @@
+en:
+  hello: "Hello world"
+  activerecord:
+    models:
+      opportunity: "Opportunity"
+      investor: "Investor"
+      article: "Article"
+      user: "Subscriber"
+    attributes:
+      opportunity:
+        opportunity_type: "Type"
+        full_name: "Full name"
+        organization: "Organization"
+      investor:
+        firm_name: "Firm name"
+        contact_name: "Contact name"
+        values: "Values"
+        looking_for: "Looking for"
+        request_for_startups: "Request for startups"

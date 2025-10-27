@@ -1,0 +1,22 @@
+<section class="max-w-3xl space-y-6">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <span class="<%= opportunity_badge(@opportunity.opportunity_type) %>"><%= @opportunity.opportunity_type.humanize %></span>
+      <h1 class="mt-4 font-display text-3xl font-semibold text-white"><%= @opportunity.title %></h1>
+      <p class="mt-2 text-sm text-slate-400"><%= @opportunity.organization %> • <%= @opportunity.full_name %></p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <% if @opportunity.approved? %>
+        <%= link_to "Mark pending", reject_admin_opportunity_path(@opportunity), method: :patch, class: "rounded-full border border-amber-400 px-4 py-2 text-sm font-semibold text-amber-200" %>
+      <% else %>
+        <%= link_to "Approve", approve_admin_opportunity_path(@opportunity), method: :patch, class: "rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-900" %>
+      <% end %>
+      <%= link_to "Edit", edit_admin_opportunity_path(@opportunity), class: "rounded-full bg-primary-600 px-4 py-2 text-sm font-semibold text-white" %>
+    </div>
+  </div>
+  <div class="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/80 p-6 text-sm text-slate-200">
+    <p><%= @opportunity.description %></p>
+    <p class="text-xs text-slate-400">Link: <%= link_to @opportunity.link, @opportunity.link, target: "_blank", rel: "noopener", class: "text-primary-200" %></p>
+    <p class="text-xs text-slate-500">Submitted <%= @opportunity.created_at.strftime("%B %d, %Y") %></p>
+  </div>
+</section>

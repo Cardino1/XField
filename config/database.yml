@@ -1,0 +1,31 @@
+# Database configuration for XField
+
+default: &default
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  timeout: 5000
+  encoding: utf8
+
+sqlite_defaults: &sqlite_defaults
+  adapter: sqlite3
+  <<: *default
+
+postgres_defaults: &postgres_defaults
+  adapter: postgresql
+  <<: *default
+  url: <%= ENV.fetch("DATABASE_URL") { "" } %>
+  database: <%= ENV.fetch("POSTGRES_DB", "xfield_production") %>
+  username: <%= ENV.fetch("POSTGRES_USER", "") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD", "") %>
+  host: <%= ENV.fetch("POSTGRES_HOST", "localhost") %>
+  port: <%= ENV.fetch("POSTGRES_PORT", 5432) %>
+
+development:
+  <<: *sqlite_defaults
+  database: db/development.sqlite3
+
+test:
+  <<: *sqlite_defaults
+  database: db/test.sqlite3
+
+production:
+  <<: *postgres_defaults

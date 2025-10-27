@@ -1,0 +1,19 @@
+<section class="mx-auto max-w-3xl px-6 py-16">
+  <div class="rounded-3xl border border-slate-800/60 bg-slate-900/70 p-8">
+    <p class="text-xs uppercase tracking-[0.3em] text-slate-400"><%= @article.published_on.strftime("%B %d, %Y") %></p>
+    <h1 class="mt-4 font-display text-4xl font-semibold text-white"><%= @article.title %></h1>
+    <p class="mt-4 text-lg text-slate-300"><%= @article.summary %></p>
+    <% if @article.hero_image_url.present? %>
+      <div class="mt-8 overflow-hidden rounded-3xl">
+        <img src="<%= @article.hero_image_url %>" alt="<%= @article.title %>" class="w-full">
+      </div>
+    <% end %>
+    <div class="prose prose-invert mt-10 max-w-none prose-headings:font-display prose-headings:text-white prose-p:text-slate-200">
+      <%= simple_format(@article.content) %>
+    </div>
+    <div class="mt-12 flex justify-between text-sm text-slate-400">
+      <%= link_to "← Back", articles_path, class: "hover:text-primary-200" %>
+      <%= link_to "Share", "https://twitter.com/intent/tweet?text=#{CGI.escape(@article.title)}", target: "_blank", rel: "noopener", class: "hover:text-primary-200" %>
+    </div>
+  </div>
+</section>
