@@ -1,0 +1,58 @@
+<section class="mx-auto max-w-4xl px-6 py-16">
+  <div class="rounded-3xl border border-slate-800/60 bg-slate-900/70 p-8">
+    <h1 class="font-display text-3xl font-semibold text-white">Create Your VC Page</h1>
+    <p class="mt-2 text-sm text-slate-300">Tell founders what you invest in, how you partner, and the signals you're looking for.</p>
+    <% if @investor.errors.any? %>
+      <div class="mt-6 rounded-2xl border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-200">
+        <p class="font-semibold">Please review the highlighted issues:</p>
+        <ul class="mt-2 list-inside list-disc space-y-1">
+          <% @investor.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form_with model: @investor, url: investors_path, class: "mt-8 space-y-6" do |f| %>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div>
+          <%= f.label :firm_name, class: "block text-xs uppercase tracking-[0.3em] text-slate-400" %>
+          <%= f.text_field :firm_name, class: "mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-primary-500 focus:outline-none" %>
+        </div>
+        <div>
+          <%= f.label :contact_name, class: "block text-xs uppercase tracking-[0.3em] text-slate-400" %>
+          <%= f.text_field :contact_name, class: "mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-primary-500 focus:outline-none" %>
+        </div>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div>
+          <%= f.label :email, class: "block text-xs uppercase tracking-[0.3em] text-slate-400" %>
+          <%= f.email_field :email, class: "mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-primary-500 focus:outline-none" %>
+        </div>
+        <div>
+          <%= f.label :website, class: "block text-xs uppercase tracking-[0.3em] text-slate-400" %>
+          <%= f.url_field :website, class: "mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-primary-500 focus:outline-none" %>
+        </div>
+      </div>
+      <div>
+        <%= f.label :values, "Values", class: "block text-xs uppercase tracking-[0.3em] text-slate-400" %>
+        <%= f.text_area :values, rows: 4, class: "mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-primary-500 focus:outline-none" %>
+      </div>
+      <div>
+        <%= f.label :looking_for, class: "block text-xs uppercase tracking-[0.3em] text-slate-400" %>
+        <%= f.text_area :looking_for, rows: 4, class: "mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-primary-500 focus:outline-none" %>
+      </div>
+      <div>
+        <%= f.label :portfolio_highlights, class: "block text-xs uppercase tracking-[0.3em] text-slate-400" %>
+        <%= f.text_area :portfolio_highlights, rows: 3, class: "mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-primary-500 focus:outline-none" %>
+      </div>
+      <div>
+        <%= f.label :request_for_startups, class: "block text-xs uppercase tracking-[0.3em] text-slate-400" %>
+        <%= f.text_area :request_for_startups, rows: 4, class: "mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-primary-500 focus:outline-none" %>
+      </div>
+      <div class="flex justify-end gap-3">
+        <%= link_to "Cancel", investors_path, class: "inline-flex items-center rounded-full border border-slate-700 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-500 hover:text-white" %>
+        <%= f.submit "Submit for Review", class: "inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-white/20 transition hover:bg-slate-100" %>
+      </div>
+    <% end %>
+  </div>
+</section>

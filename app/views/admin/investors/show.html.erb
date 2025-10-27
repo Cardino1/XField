@@ -1,0 +1,39 @@
+<section class="max-w-3xl space-y-6">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <h1 class="font-display text-3xl font-semibold text-white"><%= @investor.firm_name %></h1>
+      <p class="mt-2 text-sm text-slate-400">Contact: <%= @investor.contact_name.presence || '—' %> • <%= mail_to @investor.email, @investor.email, class: "text-primary-200" %></p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <% if @investor.approved? %>
+        <%= link_to "Mark pending", reject_admin_investor_path(@investor), method: :patch, class: "rounded-full border border-amber-400 px-4 py-2 text-sm font-semibold text-amber-200" %>
+      <% else %>
+        <%= link_to "Approve", approve_admin_investor_path(@investor), method: :patch, class: "rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-900" %>
+      <% end %>
+      <%= link_to "Edit", edit_admin_investor_path(@investor), class: "rounded-full bg-primary-600 px-4 py-2 text-sm font-semibold text-white" %>
+    </div>
+  </div>
+  <div class="space-y-6 rounded-2xl border border-slate-800 bg-slate-900/80 p-6 text-sm text-slate-200">
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Values</p>
+      <p class="mt-2"><%= @investor.values %></p>
+    </div>
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Looking for</p>
+      <p class="mt-2"><%= @investor.looking_for %></p>
+    </div>
+    <% if @investor.portfolio_highlights.present? %>
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Portfolio highlights</p>
+        <p class="mt-2"><%= @investor.portfolio_highlights %></p>
+      </div>
+    <% end %>
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-500">Request for startups</p>
+      <p class="mt-2"><%= @investor.request_for_startups %></p>
+    </div>
+    <% if @investor.website.present? %>
+      <p class="text-xs text-slate-400">Website: <%= link_to @investor.website, @investor.website, target: "_blank", rel: "noopener", class: "text-primary-200" %></p>
+    <% end %>
+  </div>
+</section>
