@@ -2,7 +2,8 @@
 
 class OpportunitiesController < ApplicationController
   def index
-    @opportunities = Opportunity.approved.order(created_at: :desc).group_by(&:opportunity_type)
+    @opportunity_types = Opportunity.opportunity_types.keys
+    @opportunities_by_type = Opportunity.approved.order(created_at: :desc).group_by(&:opportunity_type)
   end
 
   def new

@@ -8,26 +8,33 @@
     <%= link_to "Submit Opportunity", new_opportunity_path, class: "inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary-600/30 transition hover:bg-primary-500" %>
   </div>
   <div class="mt-10 grid gap-8">
-    <% @opportunities.each do |type, entries| %>
+    <% @opportunity_types.each do |type| %>
+      <% entries = @opportunities_by_type[type] || [] %>
       <div id="<%= type %>" class="space-y-5 rounded-3xl border border-slate-800/60 bg-slate-900/70 p-6">
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold text-white"><%= type.humanize %></h2>
           <span class="<%= opportunity_badge(type) %>"><%= entries.size %> live</span>
         </div>
-        <div class="space-y-4">
-          <% entries.each do |opportunity| %>
-            <article class="rounded-2xl border border-slate-800/60 bg-slate-950/70 p-5 transition hover:border-primary-500/50">
-              <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-                <span><%= opportunity.organization %></span>
-                <span><%= opportunity.created_at.strftime("%b %d, %Y") %></span>
-              </div>
-              <h3 class="mt-3 text-xl font-semibold text-white"><%= opportunity.title %></h3>
-              <p class="mt-1 text-sm text-slate-300">Posted by <%= opportunity.full_name %></p>
-              <p class="mt-3 text-sm text-slate-300"><%= opportunity.description %></p>
-              <%= link_to "Open details", opportunity.link, class: "mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-200 transition hover:text-primary-100", target: "_blank", rel: "noopener" %>
-            </article>
-          <% end %>
-        </div>
+        <% if entries.any? %>
+          <div class="space-y-4">
+            <% entries.each do |opportunity| %>
+              <article class="rounded-2xl border border-slate-800/60 bg-slate-950/70 p-5 transition hover:border-primary-500/50">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+                  <span><%= opportunity.organization %></span>
+                  <span><%= opportunity.created_at.strftime("%b %d, %Y") %></span>
+                </div>
+                <h3 class="mt-3 text-xl font-semibold text-white"><%= opportunity.title %></h3>
+                <p class="mt-1 text-sm text-slate-300">Posted by <%= opportunity.full_name %></p>
+                <p class="mt-3 text-sm text-slate-300"><%= opportunity.description %></p>
+                <%= link_to "Open details", opportunity.link, class: "mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-200 transition hover:text-primary-100", target: "_blank", rel: "noopener" %>
+              </article>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="rounded-2xl border border-dashed border-slate-700 bg-slate-950/40 p-5 text-sm text-slate-300">
+            No <%= type.humanize.downcase %> opportunities yet. <%= link_to "Submit one", new_opportunity_path, class: "font-semibold text-primary-200 hover:text-primary-100" %> to be featured.
+          </p>
+        <% end %>
       </div>
     <% end %>
   </div>
