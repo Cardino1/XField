@@ -1,0 +1,18 @@
+<section class="mx-auto max-w-6xl px-6 py-16">
+  <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Newsroom</p>
+      <h1 class="mt-2 font-display text-4xl font-semibold text-white">Latest from the XField team</h1>
+      <p class="mt-4 max-w-2xl text-slate-300">Deep dives, founder stories, and analysis on the frontier tech landscape.</p>
+    </div>
+  </div>
+  <% if @articles.any? %>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      <%= render partial: "card", collection: @articles, as: :article %>
+    </div>
+  <% else %>
+    <div class="mt-10 rounded-3xl border border-dashed border-slate-800/60 bg-slate-900/40 p-8 text-sm text-slate-300">
+      Our newsroom is still publishing its first story. Check back soon or <%= link_to "submit one from the admin", new_admin_article_path, class: "font-semibold text-primary-200 hover:text-primary-100" %>.
+    </div>
+  <% end %>
+</section>

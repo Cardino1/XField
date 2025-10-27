@@ -1,0 +1,7 @@
+<%= form_with model: user, url: updates_path, html: { class: "flex flex-col gap-3 sm:flex-row", role: "form", "aria-label" => "Subscribe for updates" } do |f| %>
+  <div class="flex-1">
+    <%= f.label :email, "Email address", class: "sr-only" %>
+    <%= f.email_field :email, required: true, placeholder: "you@example.com", class: "w-full rounded-xl border border-slate-300/60 bg-white/80 px-4 py-3 text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40", autocomplete: "email" %>
+  </div>
+  <%= f.submit "Get Updates", class: "inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500" %>
+<% end %>

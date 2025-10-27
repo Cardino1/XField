@@ -1,0 +1,19 @@
+<section class="mx-auto max-w-6xl px-6 py-16">
+  <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Investors</p>
+      <h1 class="mt-2 font-display text-4xl font-semibold text-white">Meet the XField capital network</h1>
+      <p class="mt-4 max-w-2xl text-slate-300">Partner investors who share our conviction in deep tech and bold founders. Craft a page for your firm to tell founders what you champion.</p>
+    </div>
+    <%= link_to "Create Your VC Page", new_investor_path, class: "inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-white/20 transition hover:bg-slate-100" %>
+  </div>
+  <% if @investors.any? %>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      <%= render partial: "card", collection: @investors, as: :investor %>
+    </div>
+  <% else %>
+    <div class="mt-10 rounded-3xl border border-dashed border-slate-800/60 bg-slate-900/40 p-8 text-sm text-slate-300">
+      We haven't published any investor partners yet. <%= link_to "Create your firm page", new_investor_path, class: "font-semibold text-primary-200 hover:text-primary-100" %> to be among the first featured.
+    </div>
+  <% end %>
+</section>
